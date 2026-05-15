@@ -12,9 +12,14 @@ A native macOS menu bar app that reminds you to stand up and drink water at inte
 1. Open the `.dmg` file
 2. Drag **Standup** into your **Applications** folder
 3. Launch it from Applications or Spotlight
-4. If macOS blocks it: **System Settings → Privacy & Security → Open Anyway**
 
-> The app is not notarized (no Apple Developer account required to build), so Gatekeeper will warn you on first launch.
+**If macOS says "damaged and can't be opened"** — this is a Gatekeeper false positive on unsigned apps. Fix it by running this once in Terminal:
+```bash
+xattr -cr /Applications/Standup.app
+```
+Then launch the app normally. When macOS asks if you're sure, click **Open**.
+
+> The app is not notarized (requires a paid Apple Developer account). The `xattr` command simply removes the quarantine flag macOS adds to downloaded files.
 
 ---
 

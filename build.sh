@@ -54,5 +54,11 @@ cat > "$APP/Contents/Info.plist" << 'PLIST'
 </plist>
 PLIST
 
+# Ad-hoc sign so macOS shows "unidentified developer" instead of "damaged"
+echo ""
+echo "▶ Signing..."
+xattr -cr "$APP"   # strip resource forks/quarantine before signing
+codesign --force --deep --sign - "$APP"
+
 echo ""
 echo "Done! Installing to /Applications..."
